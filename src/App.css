@@ -39,6 +39,7 @@ body {
 }
 
 
+
 .player {
   width: 240px;
   height: 180px;
@@ -53,6 +54,25 @@ body {
   display: inline-flex;
   transform: scale(1);
 }
+
+.container h3{
+  display: inline-flex;
+  flex-wrap: wrap;
+  font-size: 24px;
+  font-weight: 700;
+  margin-top: 65px;
+}
+
+  li {
+    display: inline-flex;
+    font-size:18px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    padding: 5px 10px;
+    list-style-type: none;
+    border-radius: 5px;
+  } 
+  
 
 
 .button-container {

@@ -1,7 +1,47 @@
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import "./App.css";
-import { Player, PlayerTwo } from "./App";
+import scissors from "./images/scissors.png";
+import paper from "./images/paper.png";
+import rock from "./images/rock.png";
+
+const Player = ({ weapon, playerName }) => (
+  <div className="player-main-container">
+    <h2>{playerName}</h2>
+    <div className="player">
+      <img
+        className="player-image"
+        src={
+          weapon === "rock"
+            ? rock
+            : weapon === "scissors"
+            ? scissors
+            : paper
+        }
+        alt="Rock Paper Scissors"
+      />
+    </div>
+  </div>
+);
+
+const PlayerTwo = ({ weapon, playerName }) => (
+  <div className="player-main-container">
+    <h2>{playerName}</h2>
+    <div className="player">
+      <img
+        className="player-image2"
+        src={
+          weapon === "rock"
+            ? rock
+            : weapon === "scissors"
+            ? scissors
+            : paper
+        }
+        alt="Rock Paper Scissors"
+      />
+    </div>
+  </div>
+);
 
 const weapons = ["rock", "paper", "scissors"];
 
@@ -16,6 +56,14 @@ const App = () => {
   const [playerOneName, setPlayerOneName] = useState("Player One");
   const [playerTwoName, setPlayerTwoName] = useState("Player Two");
   const [totalRounds, setTotalRounds] = useState(5);
+  const [leaderboard, setLeaderboard] = useState([]);
+
+  useEffect(() => {
+    const storedLeaderboard = JSON.parse(localStorage.getItem("leaderboard"));
+    if (storedLeaderboard) {
+      setLeaderboard(storedLeaderboard);
+    }
+  }, []);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -52,8 +100,10 @@ const App = () => {
         let overallWinner = null;
         if (playerOneScore > 2) {
           overallWinner = playerOneName;
+          updateLeaderboard(playerOneName, playerOneScore);
         } else if (playerTwoScore > 2) {
           overallWinner = playerTwoName;
+          updateLeaderboard(playerTwoName, playerTwoScore);
         }
         setWinner(selectWinner());
         setOverallWinner(overallWinner);
@@ -89,15 +139,20 @@ const App = () => {
     setRound(0);
   };
 
-  useEffect(() => {
-    if (round === parseInt(totalRounds)) {
-      resetGame();
-    }
-  }, [round, totalRounds]);
+  const updateLeaderboard = (name, score) => {
+    const updatedLeaderboard = [...leaderboard, { name, score }];
+    localStorage.setItem("leaderboard", JSON.stringify(updatedLeaderboard));
+    setLeaderboard(updatedLeaderboard);
+  };
+
+  const clearLeaderboard = () => {
+    localStorage.removeItem("leaderboard");
+    setLeaderboard([]);
+  };
 
   return (
     <>
-      <h1 style={{ textAlign: "center", textTransform:"uppercase" ,fontSize:"35px"}}>Rock Paper Scissors</h1>
+      <h1 style={{ textAlign: "center" }}>Rock Paper Scissors</h1>
       <div className="container">
         <input
           type="text"
@@ -135,24 +190,35 @@ const App = () => {
         </div>
         <div className="button-container">
           <button className="weaponBtn" onClick={() => setPlayerOne("rock")}>
-            Rock
+            rock
           </button>
           <button className="weaponBtn" onClick={() => setPlayerOne("paper")}>
-            Paper
+            paper
           </button>
           <button
             className="weaponBtn"
             onClick={() => setPlayerOne("scissors")}
           >
-            Scissors
+            scissors
           </button>
         </div>
         <div className="winner">
           {winner ? `${winner} wins!` : null}
           {overallWinner ? `Overall winner: ${overallWinner}` : null}
         </div>
+        <h3>Leaderboard</h3>
+        <ul>
+          {leaderboard.map((entry, index) => (
+            <li key={index}>
+              {entry.name}: {entry.score}
+            </li>
+          ))}
+        </ul>
         <button type="button" onClick={startGame}>
           {round === parseInt(totalRounds) ? "Reset Game" : "Start Game"}
+        </button>
+        <button type="button" onClick={clearLeaderboard}>
+          Clear Leaderboard
         </button>
       </div>
     </>
