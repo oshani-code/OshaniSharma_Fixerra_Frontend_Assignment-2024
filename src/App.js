@@ -1,25 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import scissors from "./images/scissors.png";
+import paper from "./images/paper.png";
+import rock from "./images/rock.png";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+export const Player = ({ weapon, playerName }) => (
+  <div className="player-main-container">
+    <h2>{playerName}</h2>
+    <div className="player">
+      <img
+        className="player-image"
+        src={
+          weapon === "rock" ? rock : weapon === "scissors" ? scissors : paper
+        }
+        alt="Rock Paper Scissors"
+      />
     </div>
-  );
-}
+  </div>
+);
 
-export default App;
+export const PlayerTwo = ({ weapon, playerName }) => (
+  <div className="player-main-container">
+    <h2>{playerName}</h2>
+    <div className="player">
+      <img
+        className="player-image2"
+        src={
+          weapon === "rock" ? rock : weapon === "scissors" ? scissors : paper
+        }
+        alt="Rock Paper Scissors"
+      />
+    </div>
+  </div>
+);
+
+
