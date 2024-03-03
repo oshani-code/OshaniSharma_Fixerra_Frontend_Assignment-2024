@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/OshaniSharma_Fixerra_Frontend_Assignment-2024/static/css/main.c30cc36c.css",
+    "main.js": "/OshaniSharma_Fixerra_Frontend_Assignment-2024/static/js/main.50a5e7dd.js",
+    "index.html": "/OshaniSharma_Fixerra_Frontend_Assignment-2024/index.html",
+    "main.c30cc36c.css.map": "/OshaniSharma_Fixerra_Frontend_Assignment-2024/static/css/main.c30cc36c.css.map",
+    "main.50a5e7dd.js.map": "/OshaniSharma_Fixerra_Frontend_Assignment-2024/static/js/main.50a5e7dd.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c30cc36c.css",
+    "static/js/main.50a5e7dd.js"
+  ]
+}
