@@ -215,8 +215,9 @@ const App = () => {
         <ul>
           {/* here map function to iterate over leaderboard*/}
           {leaderboard.map((entry, index) => (
-            <li key={index}>
-              {" "}
+            <li
+              key={index}
+              className={entry.name === overallWinner ? "winner" : ""}> {/*Apply 'winner' classname to highlight the leaderboard winner if the player's name matches overallWinner.*/}
               {/*use key prop to uniquely identify each list item*/}
               {entry.name}: {entry.score}
             </li>
