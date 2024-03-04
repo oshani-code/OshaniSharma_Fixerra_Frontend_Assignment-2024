@@ -1,48 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import "./App.css";
-import scissors from "./images/scissors.png";
-import paper from "./images/paper.png";
-import rock from "./images/rock.png";
-
-const Player = ({ weapon, playerName }) => (
-  <div className="player-main-container">
-    <h2>{playerName}</h2>
-    <div className="player">
-      <img
-        className="player-image"
-        src={
-          weapon === "rock"
-            ? rock
-            : weapon === "scissors"
-            ? scissors
-            : paper
-        }
-        alt="Rock Paper Scissors"
-      />
-    </div>
-  </div>
-);
-
-const PlayerTwo = ({ weapon, playerName }) => (
-  <div className="player-main-container">
-    <h2>{playerName}</h2>
-    <div className="player">
-      <img
-        className="player-image2"
-        src={
-          weapon === "rock"
-            ? rock
-            : weapon === "scissors"
-            ? scissors
-            : paper
-        }
-        alt="Rock Paper Scissors"
-      />
-    </div>
-  </div>
-);
-
+import { Player, PlayerTwo } from "./App";
 const weapons = ["rock", "paper", "scissors"];
 
 const App = () => {
@@ -58,6 +17,9 @@ const App = () => {
   const [totalRounds, setTotalRounds] = useState(5);
   const [leaderboard, setLeaderboard] = useState([]);
 
+  {
+    /*Load leaderboard data from local storage on component mount. */
+  }
   useEffect(() => {
     const storedLeaderboard = JSON.parse(localStorage.getItem("leaderboard"));
     if (storedLeaderboard) {
@@ -65,6 +27,9 @@ const App = () => {
     }
   }, []);
 
+  {
+    /*handleChange function manages state updates for total rounds, player names, and associated variables based on user input events.*/
+  }
   const handleChange = (event) => {
     const { name, value } = event.target;
     if (name === "totalRounds") {
@@ -84,6 +49,9 @@ const App = () => {
     }
   };
 
+  {
+    /*Function for Start Game*/
+  }
   const startGame = () => {
     if (round === parseInt(totalRounds)) {
       resetGame();
@@ -94,6 +62,9 @@ const App = () => {
     let gameInterval = setInterval(() => {
       counter++;
       setPlayerTwo(weapons[Math.floor(Math.random() * weapons.length)]);
+      {
+        /*Randomly selecta choice for PlayerTwo*/
+      }
       setWinner("");
       if (counter > 5) {
         clearInterval(gameInterval);
@@ -112,6 +83,9 @@ const App = () => {
     }, 100);
   };
 
+  {
+    /*Calculate the score and declare the winner */
+  }
   const selectWinner = () => {
     let winner = "";
 
@@ -124,14 +98,23 @@ const App = () => {
     ) {
       winner = playerOneName;
       setPlayerOneScore((prevScore) => prevScore + 1);
+      {
+        /*Incrementing score of player-one*/
+      }
     } else {
       winner = playerTwoName;
       setPlayerTwoScore((prevScore) => prevScore + 1);
+      {
+        /*Incrementing score of player-two*/
+      }
     }
 
     return winner;
   };
 
+  {
+    /*function for Reset Game*/
+  }
   const resetGame = () => {
     setPlayerOneScore(0);
     setPlayerTwoScore(0);
@@ -139,12 +122,18 @@ const App = () => {
     setRound(0);
   };
 
+  {
+    /*Update name and score in Leaderboard */
+  }
   const updateLeaderboard = (name, score) => {
     const updatedLeaderboard = [...leaderboard, { name, score }];
     localStorage.setItem("leaderboard", JSON.stringify(updatedLeaderboard));
     setLeaderboard(updatedLeaderboard);
   };
 
+  {
+    /*clearLeaderboard function removes the leaderboard data from local storage sets it as empty*/
+  }
   const clearLeaderboard = () => {
     localStorage.removeItem("leaderboard");
     setLeaderboard([]);
@@ -152,7 +141,16 @@ const App = () => {
 
   return (
     <>
-      <h1 style={{ textAlign: "center" }}>Rock Paper Scissors</h1>
+      <h1
+        style={{
+          textAlign: "center",
+          textTransform: "uppercase",
+          fontSize: "35px",
+        }}
+      >
+        Rock Paper Scissors
+      </h1>
+      {/*it is option provided for users to enter player name and round in input field*/}
       <div className="container">
         <input
           type="text"
@@ -184,39 +182,53 @@ const App = () => {
         <h2>
           Round: {round}/{totalRounds}
         </h2>
+        {/*contain image of players*/}
         <div className="player-container">
           <Player weapon={playerOne} playerName={playerOneName} />
           <PlayerTwo weapon={playerTwo} playerName={playerTwoName} />
         </div>
+
+        {/*button-container*/}
         <div className="button-container">
           <button className="weaponBtn" onClick={() => setPlayerOne("rock")}>
-            rock
+            Rock
           </button>
           <button className="weaponBtn" onClick={() => setPlayerOne("paper")}>
-            paper
+            Paper
           </button>
           <button
             className="weaponBtn"
             onClick={() => setPlayerOne("scissors")}
           >
-            scissors
+            Scissors
           </button>
         </div>
+
+        {/*winner*/}
         <div className="winner">
           {winner ? `${winner} wins!` : null}
           {overallWinner ? `Overall winner: ${overallWinner}` : null}
         </div>
+
+        {/*Leaderboard*/}
         <h3>Leaderboard</h3>
         <ul>
+          {/* here map function to iterate over leaderboard*/}
           {leaderboard.map((entry, index) => (
             <li key={index}>
+              {" "}
+              {/*use key prop to uniquely identify each list item*/}
               {entry.name}: {entry.score}
             </li>
           ))}
         </ul>
+
+        {/*Start button*/}
         <button type="button" onClick={startGame}>
           {round === parseInt(totalRounds) ? "Reset Game" : "Start Game"}
         </button>
+
+        {/*Clear leaderboard button*/}
         <button type="button" onClick={clearLeaderboard}>
           Clear Leaderboard
         </button>

@@ -3,7 +3,6 @@ import scissors from "./images/scissors.png";
 import paper from "./images/paper.png";
 import rock from "./images/rock.png";
 
-
 export const Player = ({ weapon, playerName }) => (
   <div className="player-main-container">
     <h2>{playerName}</h2>
@@ -33,5 +32,3 @@ export const PlayerTwo = ({ weapon, playerName }) => (
     </div>
   </div>
 );
-
-
