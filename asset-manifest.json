@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/OshaniSharma_Fixerra_Frontend_Assignment-2024/static/css/main.c30cc36c.css",
-    "main.js": "/OshaniSharma_Fixerra_Frontend_Assignment-2024/static/js/main.50a5e7dd.js",
+    "main.css": "/OshaniSharma_Fixerra_Frontend_Assignment-2024/static/css/main.141b2e71.css",
+    "main.js": "/OshaniSharma_Fixerra_Frontend_Assignment-2024/static/js/main.59dbd839.js",
     "index.html": "/OshaniSharma_Fixerra_Frontend_Assignment-2024/index.html",
-    "main.c30cc36c.css.map": "/OshaniSharma_Fixerra_Frontend_Assignment-2024/static/css/main.c30cc36c.css.map",
-    "main.50a5e7dd.js.map": "/OshaniSharma_Fixerra_Frontend_Assignment-2024/static/js/main.50a5e7dd.js.map"
+    "main.141b2e71.css.map": "/OshaniSharma_Fixerra_Frontend_Assignment-2024/static/css/main.141b2e71.css.map",
+    "main.59dbd839.js.map": "/OshaniSharma_Fixerra_Frontend_Assignment-2024/static/js/main.59dbd839.js.map"
   },
   "entrypoints": [
-    "static/css/main.c30cc36c.css",
-    "static/js/main.50a5e7dd.js"
+    "static/css/main.141b2e71.css",
+    "static/js/main.59dbd839.js"
   ]
 }
